@@ -1,8 +1,8 @@
 --Settings--
 local ESP = {
     LocalPlayer = false,
-    Enabled = false,
-    Boxes = false,
+    Enabled = true,
+    Boxes = true,
     BoxShift = CFrame.new(0,-1.5,0),
     BoxSize = Vector3.new(4,6,0),
     BoxColor = Color3.fromRGB(255, 170, 0),
@@ -10,23 +10,22 @@ local ESP = {
     HealthColor = Color3.fromRGB(152, 72, 72),
     DistancesColor = Color3.fromRGB(152, 72, 72),
     NameColor = Color3.fromRGB(152, 72, 72),
-    FaceCamera = false,
+    FaceCamera = true,
     Name = false,
     TeamColor = false,
     Thickness = 1,
     AttachShift = 1,
-    Players = false,
-    TeamMates = false,
-    Enemies = false,
+    Players = true,
+    TeamMates = true,
+    Enemies = true,
     Distances = false,
     Objects = setmetatable({}, {__mode="kv"}),
     Overrides = {},
     Health = false
 }
 
--- drawing support
 if Drawing == nil then
-    Drawing = loadstring(game:HttpGet("https://raw.githubusercontent.com/scar17off/Roblemy/main/libs/Drawing.lua"))()
+    Drawing = loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/Roblox-Drawing-Lib/main/main.lua"))()
 end
 
 --Declarations--
@@ -384,11 +383,11 @@ local function CharAdded(char)
     if not char:FindFirstChild("HumanoidRootPart") then
         local ev
         ev = char.ChildAdded:Connect(function(c)
-            if c.Name == "HumanoidRootPart" then
+            if c.Name == "HumanoidRootPart" and p.Character.Humanoid then
                 ev:Disconnect()
                 ESP:Add(char, {
                     Name = p.Name,
-                    Health = p.Character.Humanoid.Health
+                    Health = p.Character.Humanoid.Health,
                     Player = p,
                     PrimaryPart = c
                 })
@@ -397,7 +396,7 @@ local function CharAdded(char)
     else
         ESP:Add(char, {
             Name = p.Name,
-            Health = p.Character.Humanoid.Health
+            Health = p.Character.Humanoid.Health,
             Player = p,
             PrimaryPart = char.HumanoidRootPart
         })
