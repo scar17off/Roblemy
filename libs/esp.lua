@@ -172,7 +172,7 @@ function boxBase:Update()
     if self.Player and not ESP.TeamMates and ESP:IsTeamMate(self.Player) then
         allow = false
     end
-    if self.Player and ESP.Enemies and not ESP:IsTeamMate(self.Player) then
+    if self.Player and not ESP.Enemies and not ESP:IsTeamMate(self.Player) then
         allow = false
     end
     if self.Player and not ESP.Players then
