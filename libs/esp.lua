@@ -383,7 +383,7 @@ local function CharAdded(char)
     if not char:FindFirstChild("HumanoidRootPart") then
         local ev
         ev = char.ChildAdded:Connect(function(c)
-            if c.Name == "HumanoidRootPart" and p.Character.Humanoid then
+            if c.Name == "HumanoidRootPart" and p.Character.Humanoid ~= nil then
                 ev:Disconnect()
                 ESP:Add(char, {
                     Name = p.Name,
@@ -394,12 +394,14 @@ local function CharAdded(char)
             end
         end)
     else
-        ESP:Add(char, {
-            Name = p.Name,
-            Health = p.Character.Humanoid.Health,
-            Player = p,
-            PrimaryPart = char.HumanoidRootPart
-        })
+        if p.Character.Humanoid ~= nil then
+            ESP:Add(char, {
+                Name = p.Name,
+                Health = p.Character.Humanoid.Health,
+                Player = p,
+                PrimaryPart = char.HumanoidRootPart
+            })
+        end
     end
 end
 local function PlayerAdded(p)
